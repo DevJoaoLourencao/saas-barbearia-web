@@ -4,9 +4,10 @@ import { CalendarIcon, HomeIcon, LogInIcon, LogOutIcon } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import { quickSearchOptions } from "../_constants/search";
+import SignInDialog from "./sign-in-dialog";
 import { Avatar, AvatarImage } from "./ui/avatar";
 import { Button } from "./ui/button";
-import { Dialog, DialogTrigger } from "./ui/dialog";
+import { Dialog, DialogContent, DialogTrigger } from "./ui/dialog";
 import { SheetClose, SheetContent, SheetHeader, SheetTitle } from "./ui/sheet";
 
 const SidebarSheet = () => {
@@ -17,7 +18,7 @@ const SidebarSheet = () => {
       </SheetHeader>
 
       <div className="flex items-center justify-between gap-3 border-b border-solid py-5">
-        {true ? (
+        {false ? (
           <div className="flex items-center gap-2">
             <Avatar>
               <AvatarImage src={"https://github.com/shadcn.png"} />
@@ -37,6 +38,9 @@ const SidebarSheet = () => {
                   <LogInIcon />
                 </Button>
               </DialogTrigger>
+              <DialogContent className="w-[90%]">
+                <SignInDialog />
+              </DialogContent>
             </Dialog>
           </>
         )}
@@ -77,7 +81,7 @@ const SidebarSheet = () => {
         ))}
       </div>
 
-      {true && (
+      {false && (
         <div className="flex flex-col gap-2 py-5">
           <Button
             variant="ghost"
