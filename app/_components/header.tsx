@@ -1,6 +1,7 @@
 import { MenuIcon } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
+import SidebarSheet from "./sidebar-sheet";
 import { Button } from "./ui/button";
 import { Card, CardContent } from "./ui/card";
 import { Sheet, SheetTrigger } from "./ui/sheet";
@@ -19,6 +20,7 @@ const Header = () => {
               <MenuIcon />
             </Button>
           </SheetTrigger>
+          <SidebarSheet />
         </Sheet>
       </CardContent>
     </Card>
