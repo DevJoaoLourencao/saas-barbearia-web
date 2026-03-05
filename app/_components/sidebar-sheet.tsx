@@ -1,6 +1,7 @@
 "use client";
 
 import { CalendarIcon, HomeIcon, LogInIcon, LogOutIcon } from "lucide-react";
+import { signOut, useSession } from "next-auth/react";
 import Image from "next/image";
 import Link from "next/link";
 import { quickSearchOptions } from "../_constants/search";
@@ -11,6 +12,9 @@ import { Dialog, DialogContent, DialogTrigger } from "./ui/dialog";
 import { SheetClose, SheetContent, SheetHeader, SheetTitle } from "./ui/sheet";
 
 const SidebarSheet = () => {
+  const { data } = useSession();
+  const handleLogoutClick = () => signOut();
+
   return (
     <SheetContent className="overflow-y-auto">
       <SheetHeader>
@@ -18,15 +22,15 @@ const SidebarSheet = () => {
       </SheetHeader>
 
       <div className="flex items-center justify-between gap-3 border-b border-solid py-5">
-        {false ? (
+        {data?.user ? (
           <div className="flex items-center gap-2">
             <Avatar>
-              <AvatarImage src={"https://github.com/shadcn.png"} />
+              <AvatarImage src={data?.user?.image ?? ""} />
             </Avatar>
 
             <div>
-              <p className="font-bold">João da Silva</p>
-              <p className="text-xs">joao@example.com</p>
+              <p className="font-bold">{data.user.name}</p>
+              <p className="text-xs">{data.user.email}</p>
             </div>
           </div>
         ) : (
@@ -81,12 +85,12 @@ const SidebarSheet = () => {
         ))}
       </div>
 
-      {false && (
+      {data?.user && (
         <div className="flex flex-col gap-2 py-5">
           <Button
             variant="ghost"
             className="justify-start gap-2"
-            onClick={() => {}}
+            onClick={handleLogoutClick}
           >
             <LogOutIcon size={18} />
             Sair da conta
